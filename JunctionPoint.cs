@@ -13,6 +13,9 @@ namespace htdocsSwitcher
     /// <summary>
     /// Provides access to NTFS junction points in .Net.
     /// </summary>
+    /// <remarks>
+    /// Source: http://www.codeproject.com/Articles/15633/Manipulating-NTFS-Junction-Points-in-NET
+    /// </remarks>
     public static class JunctionPoint
     {
         /// <summary>
