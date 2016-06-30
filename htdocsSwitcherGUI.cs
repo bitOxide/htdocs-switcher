@@ -116,13 +116,6 @@ namespace htdocsSwitcher
                 return;
             }
 
-            //fileLines = new string[]
-            //{
-            //    @"D:\Xampp",
-            //    @"D:\Code\bitOxide\SimplePoke\src|SimplePoke",
-            //    @"D:\Xampp\htdocs.default",
-            //};
-
             if (fileLines.Length < 2)
             {
                 Log("Keine XAMPP Path bzw. Projekt gefunden.");
