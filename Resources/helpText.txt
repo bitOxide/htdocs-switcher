@@ -1,0 +1,4 @@
+<Xampp Pfad>
+<htdocs Projekt>
+<htdocs Projekt>|<Name>
+...
