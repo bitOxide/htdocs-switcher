@@ -16,7 +16,9 @@ namespace htdocsSwitcher
     {
         private readonly string configFile = "config.txt";
         private string xamppLocation;
+        private string title;
         private IDictionary<string, string> projects;
+        private string htdocsLoc { get { return xamppLocation == null ? null : Path.Combine(xamppLocation, "htdocs"); } }
 
         public htdocsSwitcherGUI()
         {
@@ -50,7 +52,6 @@ namespace htdocsSwitcher
             }
             var loc = projects[n];
 
-            var htdocsLoc = Path.Combine(xamppLocation, "htdocs");
             var isJunction = JunctionPoint.Exists(htdocsLoc);
             var isDirOrFile = Directory.Exists(htdocsLoc) || File.Exists(htdocsLoc);
 
@@ -61,13 +62,18 @@ namespace htdocsSwitcher
             }
 
             JunctionPoint.Create(htdocsLoc, loc, true);
+            RefreshAll();
             Log($"{n} erfolgreich verknüpft.");
         }
 
         private void RefreshAll()
         {
+            title = null;
             RefreshEntries();
+            var t = title == null ? "" : $" [{title}]";
+            this.Text = "htdoc Switcher" + t;
             UpdateDropDown();
+            comboBox1.SelectedItem = title;
         }
 
         private void ClearEntries()
@@ -132,6 +138,10 @@ namespace htdocsSwitcher
             }
 
             var dict = new Dictionary<string, string>();
+            string juncLoc = null;
+
+            if (JunctionPoint.Exists(htdocsLoc))
+                juncLoc = JunctionPoint.GetTarget(htdocsLoc);
 
             foreach (var l in fileLines.Skip(1))
             {
@@ -167,6 +177,9 @@ namespace htdocsSwitcher
                     Debug.WriteLine("Projektpfad nicht gefunden.");
                     continue;
                 }
+
+                if (location == juncLoc)
+                    title = name;
 
                 dict.Add(name, location);
                 Debug.WriteLine($"Projekt \"{name}\" hinzugefügt.");
