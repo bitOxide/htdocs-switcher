@@ -12,13 +12,13 @@ using System.Windows.Forms;
 
 namespace htdocsSwitcher
 {
-    public partial class Form1 : Form
+    public partial class htdocsSwitcherGUI : Form
     {
         private readonly string configFile = "config.txt";
         private string xamppLocation;
         private IDictionary<string, string> projects;
 
-        public Form1()
+        public htdocsSwitcherGUI()
         {
             InitializeComponent();
             RefreshAll();
